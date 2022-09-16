@@ -1,0 +1,14 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: rgb(52, 52, 52);
+}
+table tr#row1{
+    background-color: rgb(167, 167, 167);
+    font-size: 13px;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
