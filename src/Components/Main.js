@@ -1,13 +1,15 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import "./css/Main.css";
 import { Icon } from "@iconify/react";
 import NewToll from "./Modals/NewToll";
 import Table from "./Table";
 import NewVehicle from "./Modals/NewVehicle";
+import TollTable from "./TollTable";
 
 function Main() {
   const [openModal, setOpenModal] = useState(false);
   const [openVehicle, setOpenVehicle] = useState(false);
+  const [toggleTable, setToggleTable] = useState(false);
 
   return (
     <>
@@ -29,7 +31,6 @@ function Main() {
             <button
               className="btn"
               onClick={() => {
-               
                 setOpenVehicle(true);
               }}
             >
@@ -37,19 +38,39 @@ function Main() {
             </button>
             <button
               className="btn"
-          onClick={()=>{
-             setOpenModal(true); 
-          }}
+              onClick={() => {
+                setOpenModal(true);
+              }}
             >
               Add New Toll
             </button>
-            <button className="btn">View All Toll</button>
+            {!toggleTable && (
+              <button
+                className="btn"
+                onClick={() => {
+                  setToggleTable(true);
+                }}
+              >
+                View All Toll
+              </button>
+            )}
+            {toggleTable && (
+              <button
+                className="btn"
+                onClick={() => {
+                  setToggleTable(false);
+                }}
+              >
+                Back to main
+              </button>
+            )}
           </div>
         </div>
-        <Table />
+        {!toggleTable && <Table />}
       </div>
-      {openModal&& <NewToll closeModal={setOpenModal} />}
+      {openModal && <NewToll closeModal={setOpenModal} />}
       {openVehicle && <NewVehicle closeModal={setOpenVehicle} />}
+      {toggleTable && <TollTable />}
     </>
   );
 }

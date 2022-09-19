@@ -1,22 +1,77 @@
  export const toll = [
-  {
-    id: "t1",
-    toll_name: "Kappalur",
-    vehicle: ["car/jeep", "lsv", "truck/bus"],
-  },
-  {
-    id: "t2",
-    toll_name: "Kappalur",
-    vehicle: ["car/jeep", "lsv", "truck/bus"],
-  },
-  {
-    id: "t3",
-    toll_name: "Kappalur",
-    vehicle: ["car/jeep", "lsv", "truck/bus"],
-  },
-  {
-    id: "t4",
-    toll_name: "Kappalur",
-    vehicle: ["car/jeep", "lsv", "truck/bus"],
-  },
-];
+   {
+     toll_name: "Kappalur",
+     vehicle: [
+       {
+         type: "Car/Jeep",
+         fare: 60,
+         rf: 30,
+       },
+       {
+         type: "LCV",
+         fare: 90,
+         rf: 30,
+       },
+       {
+         type: "Truck/Bus",
+         fare: 200,
+         rf: 30,
+       },
+       {
+         type: "Heavy/Vehicle",
+         fare: 290,
+         rf: 30,
+       },
+     ],
+   },
+   {
+     toll_name: "Chengalpattu",
+     vehicle: [
+       {
+         type: "Car/Jeep",
+         fare: 60,
+         rf: 30,
+       },
+       {
+         type: "LCV",
+         fare: 90,
+         rf: 30,
+       },
+       {
+         type: "Truck/Bus",
+         fare: 200,
+         rf: 30,
+       },
+       {
+         type: "Heavy/Vehicle",
+         fare: 290,
+         rf: 30,
+       },
+     ],
+   },
+   {
+     toll_name: "Krishnagiri",
+     vehicle: [
+       {
+         type: "Car/Jeep",
+         fare: 60,
+         rf: 30,
+       },
+       {
+         type: "LCV",
+         fare: 90,
+         rf: 30,
+       },
+       {
+         type: "Truck/Bus",
+         fare: 200,
+         rf: 30,
+       },
+       {
+         type: "Heavy/Vehicle",
+         fare: 290,
+         rf: 30,
+       },
+     ],
+   },
+ ];

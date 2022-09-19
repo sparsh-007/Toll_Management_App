@@ -17,18 +17,6 @@ function NewVehicle({closeModal}) {
             </p>
           </div>
           <div className="form1">
-            <form>
-              <label>
-                <h5>Name</h5>
-                <select id="cars" name="cars">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="fiat">Fiat</option>
-                  <option value="audi">Audi</option>
-                </select>
-              </label>
-              <button type="submit">add entry</button>
-            </form>
           </div>
         </div>
       </div>
