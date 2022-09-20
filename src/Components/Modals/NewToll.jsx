@@ -2,6 +2,11 @@ import React from "react";
 import "./NewToll.css";
 
 function NewToll({ closeModal }) {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <>
       <div className="overlay">
@@ -17,14 +22,19 @@ function NewToll({ closeModal }) {
             </p>
           </div>
           <div className="form">
-            <form action="" className="form_section">
+            <form action="" className="form_section" onSubmit={submitHandler}>
               <div className="tollname">
                 <label htmlFor="TollName">
                   <h5>
                     Toll Name<span>*</span>
                   </h5>
                 </label>
-                <input type="text" id="toll_name" required placeholder="Enter Toll Name"/>
+                <input
+                  type="text"
+                  id="toll_name"
+                  required
+                  placeholder="Enter Toll Name"
+                />
               </div>
               <label htmlFor="Vehicle fare details">
                 <h5>
@@ -77,7 +87,10 @@ function NewToll({ closeModal }) {
                   <input type="number" placeholder="Return Journey" />
                 </div>
               </div>
-              <button type="submit" className="form_btn"> Add Details</button>
+              <button type="submit" className="form_btn">
+                {" "}
+                Add Details
+              </button>
             </form>
           </div>
         </div>

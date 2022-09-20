@@ -10,7 +10,7 @@
        {
          type: "LCV",
          fare: 90,
-         rf: 30,
+         rf: 30,  
        },
        {
          type: "Truck/Bus",
@@ -29,7 +29,7 @@
      vehicle: [
        {
          type: "Car/Jeep",
-         fare: 60,
+         fare: 50,
          rf: 30,
        },
        {
