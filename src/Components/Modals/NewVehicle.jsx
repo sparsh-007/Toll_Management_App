@@ -43,9 +43,9 @@ function NewVehicle({ closeModal }) {
                 </datalist>
               </div>
               <label htmlFor="vehicle_number"><h5>Enter Vehicle Number<span>*</span></h5></label>
-              <input type="text" placeholder="Enter Number"/>
+              <input type="text" name="vehicle_number" placeholder="Enter Number"/>
               <label htmlFor="tariff"><h5>Tariff<span>*</span></h5></label>
-              <input type="text" placeholder="Amount"  disabled/>
+              <input type="text" name="tariff" placeholder="Amount"  disabled/>
               <button type="submit">Add Entry</button>
             </form>
           </div>
