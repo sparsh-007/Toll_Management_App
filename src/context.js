@@ -6,7 +6,7 @@ const AppProvider=({children})=>{
   // eslint-disable-next-line
   const [tollData, setTollData] = useState(toll);
 
-  return <AppContext.Provider value={tollData}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{tollData,setTollData}}>{children}</AppContext.Provider>;
 }
 const useGlobalContext = () => {
   return useContext(AppContext);

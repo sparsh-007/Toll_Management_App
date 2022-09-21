@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NewToll.css";
+import { useGlobalContext } from "../../context";
 
-// {type: 'Car/Jeep', fare: 0, rf: 0},
 // 		{
 // 			type: 'LCV',
 // 			fare: 0,
@@ -29,12 +29,13 @@ const initialState = {
 };
 
 function NewToll({ closeModal }) {
+  const {setTollData}=useGlobalContext();
   const [newTollData, setNewTollData] = useState(initialState);
 
   const handleChange = (e, i) => {
     const { name, value } = e.target;
 
-    console.log(name, value, i);
+    // console.log(name, value, i);
 
     setNewTollData((prev) => {
       prev.vehicle[i][name] = value;
@@ -44,7 +45,7 @@ function NewToll({ closeModal }) {
 
   const handleChangeDropdown = (e, i) => {
     const { name, value } = e.target;
-    console.log(name, value, i);
+    // console.log(name, value, i);
 
     if (value !== "" && newTollData.vehicle.some((e) => e.type === value)) {
       alert("Please select a unique vehicle type");
@@ -75,7 +76,6 @@ function NewToll({ closeModal }) {
               className="form_section"
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log(newTollData);
 
                 const data = newTollData;
                 const carJeep = data.vehicle.filter(
@@ -97,6 +97,9 @@ function NewToll({ closeModal }) {
                 data.vehicle = finalData;
 
                 console.log(data);
+                setTollData(current=>[...current,data]);
+                setNewTollData(initialState);
+  
                 
               }}
             >

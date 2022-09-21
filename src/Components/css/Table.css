@@ -9,6 +9,16 @@ table tr#row1{
 }
 th, td {
   padding: 8px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
+}
+#delete{
+  border: 1px solid red;
+  background-color: rgb(228, 82, 82);
+  color: white;
+  width: 80px;
+  height: 22px;
+}
+#delete:hover{
+  cursor: pointer;
 }
