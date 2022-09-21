@@ -1,40 +1,60 @@
-import React, { useState,useEffect} from "react";
+import React, { useState } from "react";
 import "./NewToll.css";
 
+// {type: 'Car/Jeep', fare: 0, rf: 0},
+// 		{
+// 			type: 'LCV',
+// 			fare: 0,
+// 			rf: 0,
+// 		},
+// 		{
+// 			type: 'Truck/Bus',
+// 			fare: 0,
+// 			rf: 0,
+// 		},
+// 		{
+// 			type: 'Heavy/Vehicle',
+// 			fare: 0,
+// 			rf: 0,
+// 		},
+
+const initialState = {
+  toll_name: "",
+  vehicle: [
+    { type: "", fare: "", rf: "" },
+    { type: "", fare: "", rf: "" },
+    { type: "", fare: "", rf: "" },
+    { type: "", fare: "", rf: "" },
+  ],
+};
+
 function NewToll({ closeModal }) {
-  const initialState = {
-    toll_name: "",
-    vehicle: [
-      { type: "car/jeep", fare: 0, rf: 0 },
-      {
-        type: "LCV",
-        fare: 0,
-        rf: 0,
-      },
-      {
-        type: "Truck/Bus",
-        fare: 0,
-        rf: 0,
-      },
-      {
-        type: "Heavy/Vehicle",
-        fare: 0,
-        rf: 0,
-      },
-    ],
-  };
   const [newTollData, setNewTollData] = useState(initialState);
 
-  const handleChange=(e)=>{
-    const name=e.target.name;
-    const value=e.target.value
-   setNewTollData({...newTollData,toll_name:value})
-    
-    console.log(name,value);
-  }
-  useEffect(()=>{
-    console.log(newTollData);
-  },[newTollData])
+  const handleChange = (e, i) => {
+    const { name, value } = e.target;
+
+    console.log(name, value, i);
+
+    setNewTollData((prev) => {
+      prev.vehicle[i][name] = value;
+      return { ...prev };
+    });
+  };
+
+  const handleChangeDropdown = (e, i) => {
+    const { name, value } = e.target;
+    console.log(name, value, i);
+
+    if (value !== "" && newTollData.vehicle.some((e) => e.type === value)) {
+      alert("Please select a unique vehicle type");
+    }
+
+    setNewTollData((prev) => {
+      prev.vehicle[i].type = value;
+      return prev;
+    });
+  };
 
   return (
     <>
@@ -51,18 +71,52 @@ function NewToll({ closeModal }) {
             </p>
           </div>
           <div className="form">
-            <form action="" className="form_section">
+            <form
+              className="form_section"
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log(newTollData);
+
+                const data = newTollData;
+                const carJeep = data.vehicle.filter(
+                  (e) => e.type === "Car/Jeep"
+                )[0];
+
+                const LCV = data.vehicle.filter((e) => e.type === "LCV")[0];
+
+                const truckBus = data.vehicle.filter(
+                  (e) => e.type === "Truck/Bus"
+                )[0];
+
+                const Heavy = data.vehicle.filter(
+                  (e) => e.type === "Heavy Vehicles"
+                )[0];
+
+                const finalData = [carJeep, LCV, truckBus, Heavy];
+
+                data.vehicle = finalData;
+
+                console.log(data);
+                
+              }}
+            >
               <div className="tollname">
                 <label htmlFor="TollName">
                   <h5>
                     Toll Name<span>*</span>
                   </h5>
                 </label>
-                <input onChange={handleChange}
+                <input
+                  onChange={(e) =>
+                    setNewTollData((prev) => ({
+                      ...prev,
+                      toll_name: e.target.value,
+                    }))
+                  }
                   type="text"
                   id="toll_name"
                   required
-                  name="tollname"
+                  name="toll_name"
                   placeholder="Enter Toll Name"
                 />
               </div>
@@ -73,91 +127,115 @@ function NewToll({ closeModal }) {
               </label>
               <div className="list_cont">
                 <div className="list">
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChangeDropdown(e, 0)}
                     list="vehicle"
                     name="vehicle_type"
                     placeholder="Select Vehicle type"
                   />
-                  <datalist id="vehicle">
+                  <datalist id="vehicle" value={newTollData.vehicle[0].type}>
                     <option value="Car/Jeep" />
                     <option value="LCV" />
                     <option value="Truck/Bus" />
                     <option value="Heavy Vehicles" />
                   </datalist>
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 0)}
                     type="number"
-                    name="single_journey"
+                    name="fare"
                     placeholder="Single Journey"
+                    value={newTollData.vehicle[0].fare}
                   />
-                  <input onChange={handleChange} type="number" name="return_journey" placeholder="Return Journey" />
-                </div>
-                <div className="list">
-                  <input onChange={handleChange}
-                    list="vehicle"
-                    placeholder="Select Vehicle type"
-                    name="vehicle_type"
-                  />
-                  <datalist id="vehicle">
-                    <option value="Car/Jeep" />
-                    <option value="LCV" />
-                    <option value="Truck/Bus" />
-                    <option value="Heavy Vehicles" />
-                  </datalist>
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 0)}
                     type="number"
-                    name="single_journey"
-                    placeholder="Single Journey"
-                  />
-                  <input onChange={handleChange}
-                    type="number"
-                    name="return_journey"
+                    name="rf"
                     placeholder="Return Journey"
+                    value={newTollData.vehicle[0].rf}
                   />
                 </div>
                 <div className="list">
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChangeDropdown(e, 1)}
                     list="vehicle"
-                    name="vehicle_type"
                     placeholder="Select Vehicle type"
+                    name="vehicle_type"
                   />
-                  <datalist id="vehicle">
+                  <datalist id="vehicle" value={newTollData.vehicle[1].type}>
                     <option value="Car/Jeep" />
                     <option value="LCV" />
                     <option value="Truck/Bus" />
                     <option value="Heavy Vehicles" />
                   </datalist>
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 1)}
                     type="number"
-                    name="single_journey"
+                    name="fare"
                     placeholder="Single Journey"
+                    value={newTollData.vehicle[1].fare}
                   />
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 1)}
                     type="number"
-                    name="return_journey"
+                    name="rf"
                     placeholder="Return Journey"
+                    value={newTollData.vehicle[1].rf}
                   />
                 </div>
                 <div className="list">
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChangeDropdown(e, 2)}
                     list="vehicle"
                     name="vehicle_type"
                     placeholder="Select Vehicle type"
                   />
-                  <datalist id="vehicle">
+                  <datalist id="vehicle" value={newTollData.vehicle[2].type}>
                     <option value="Car/Jeep" />
                     <option value="LCV" />
                     <option value="Truck/Bus" />
                     <option value="Heavy Vehicles" />
                   </datalist>
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 2)}
                     type="number"
-                    name="single_journey"
+                    name="fare"
                     placeholder="Single Journey"
+                    value={newTollData.vehicle[2].fare}
                   />
-                  <input onChange={handleChange}
+                  <input
+                    onChange={(e) => handleChange(e, 2)}
                     type="number"
-                    name="return_journey"
+                    name="rf"
                     placeholder="Return Journey"
+                    value={newTollData.vehicle[2].rf}
+                  />
+                </div>
+                <div className="list">
+                  <input
+                    onChange={(e) => handleChangeDropdown(e, 3)}
+                    list="vehicle"
+                    name="vehicle_type"
+                    placeholder="Select Vehicle type"
+                  />
+                  <datalist id="vehicle" value={newTollData.vehicle[3].type}>
+                    <option value="Car/Jeep" />
+                    <option value="LCV" />
+                    <option value="Truck/Bus" />
+                    <option value="Heavy Vehicles" />
+                  </datalist>
+                  <input
+                    onChange={(e) => handleChange(e, 3)}
+                    type="number"
+                    name="fare"
+                    placeholder="Single Journey"
+                    value={newTollData.vehicle[3].fare}
+                  />
+                  <input
+                    onChange={(e) => handleChange(e, 3)}
+                    type="number"
+                    name="rf"
+                    placeholder="Return Journey"
+                    value={newTollData.vehicle[3].rf}
                   />
                 </div>
               </div>
