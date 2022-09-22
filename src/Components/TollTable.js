@@ -5,7 +5,7 @@ function TollTable() {
   const { tollData } = useGlobalContext();
   const { setTollData } = useGlobalContext();
   const handleDelete = (item, e) => {
-    const ans = tollData.filter((it) => it.toll_name != item);
+    const ans = tollData.filter((it) => it.toll_name !== item);
     console.log(ans);
     setTollData(ans);
   };

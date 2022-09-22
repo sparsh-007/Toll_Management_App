@@ -1,46 +1,33 @@
 import React from "react";
 import "./css/Table.css";
+import { useGlobalContext } from "../context";
 
 function Table() {
+  const { vehicle } = useGlobalContext();
   return (
     <>
       <table>
         <tbody>
           <tr id="row1">
-            <th>VEHICLE TYPE</th>
-            <th>VEHICLE NUMBER</th>
-            <th>DATE/TIME</th>
-            <th>TOLL NAME</th>
-            <th>TARIFF</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Number</th>
+            <th>Date/Time</th>
+            <th>Toll Name</th>
+            <th>Tariff</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-          </tr>
+          {vehicle.map((item) => {
+            return (
+              <>
+                <tr>
+                  <td key={item.vehicle_id}>{item.type}</td>
+                  <td key={item.vehicle_id}>{item.vehicle_id}</td>
+                  <td key={item.vehicle_id}>{item.entry_time}</td>
+                  <td key={item.vehicle_id}>{item.toll_name}</td>
+                  <td key={item.vehicle_id}>{item.amount}</td>
+                </tr>
+              </>
+            );
+          })}
         </tbody>
       </table>
     </>

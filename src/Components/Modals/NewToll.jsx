@@ -2,21 +2,6 @@ import React, { useState } from "react";
 import "./NewToll.css";
 import { useGlobalContext } from "../../context";
 
-// 		{
-// 			type: 'LCV',
-// 			fare: 0,
-// 			rf: 0,
-// 		},
-// 		{
-// 			type: 'Truck/Bus',
-// 			fare: 0,
-// 			rf: 0,
-// 		},
-// 		{
-// 			type: 'Heavy/Vehicle',
-// 			fare: 0,
-// 			rf: 0,
-// 		},
 
 const initialState = {
   toll_name: "",
@@ -44,7 +29,7 @@ function NewToll({ closeModal }) {
   };
 
   const handleChangeDropdown = (e, i) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     // console.log(name, value, i);
 
     if (value !== "" && newTollData.vehicle.some((e) => e.type === value)) {
